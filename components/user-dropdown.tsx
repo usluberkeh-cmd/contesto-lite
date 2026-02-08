@@ -2,6 +2,7 @@
 
 import { useRouter, usePathname } from "next/navigation";
 import { User, LayoutDashboard, LogOut } from "lucide-react";
+import { ThemeToggleSubmenu } from "@/components/theme-toggle";
 import { createClient } from "@/lib/supabase/client";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -72,6 +73,7 @@ export function UserDropdown({ email }: UserDropdownProps) {
               Aller au tableau de bord
             </DropdownMenuItem>
           )}
+          <ThemeToggleSubmenu />
         </DropdownMenuGroup>
 
         <DropdownMenuSeparator />
