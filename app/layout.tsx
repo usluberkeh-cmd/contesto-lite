@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { ThemeProvider } from "next-themes"
 import { Suspense } from "react"
 import { headers } from "next/headers"
 import { createClient } from "@/lib/supabase/server"
@@ -55,10 +56,17 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="fr">
+    <html lang="fr" suppressHydrationWarning>
       <body className={`font-sans ${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {!isAuthRoute && <AppHeader user={user} />}
-        <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {!isAuthRoute && <AppHeader user={user} />}
+          <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>
